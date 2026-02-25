@@ -2,7 +2,6 @@
 //  HealPointUITestsLaunchTests.swift
 //  HealPointUITests
 //
-//  Created by Aftaab Mulla on 24/02/26.
 //
 
 import XCTest

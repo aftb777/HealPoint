@@ -2,7 +2,6 @@
 //  HealPointTests.swift
 //  HealPointTests
 //
-//  Created by Aftaab Mulla on 24/02/26.
 //
 
 import Testing

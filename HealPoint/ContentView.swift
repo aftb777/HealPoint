@@ -2,23 +2,18 @@
 //  ContentView.swift
 //  HealPoint
 //
-//  Created by Aftaab Mulla on 24/02/26.
 //
 
 import SwiftUI
 
 struct ContentView: View {
+    
+    @StateObject private var appState = AppState()
+    
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        NavigationStack {
+            OnboardingView()
         }
-        .padding()
+        .environmentObject(appState)
     }
-}
-
-#Preview {
-    ContentView()
 }
