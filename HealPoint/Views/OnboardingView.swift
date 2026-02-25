@@ -23,8 +23,8 @@ struct OnboardingView: View {
             }
             .buttonStyle(.borderedProminent)
             
-            Button("Sign in as Doctor") {
-                // Doctor flow later
+            NavigationLink("Sign in as Doctor") {
+                DoctorOnboardingView()
             }
             .buttonStyle(.bordered)
         }
