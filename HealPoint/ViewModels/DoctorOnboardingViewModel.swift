@@ -6,7 +6,7 @@
 
 import Foundation
 import UIKit
-import Combine
+import Combine 
 
 class DoctorOnboardingViewModel: ObservableObject {
     
@@ -20,18 +20,33 @@ class DoctorOnboardingViewModel: ObservableObject {
     @Published var showSubmissionSheet = false
     @Published var verificationCompleted = false
     
+    // Navigation
+    @Published var approvedDoctor: Doctor?
+    @Published var navigateToHome = false
+    
     func submitApplication() {
         guard !name.isEmpty,
               !specialization.isEmpty,
-              !licenseNumber.isEmpty,
-              profileImage != nil,
-              certificateImage != nil else {
+              !licenseNumber.isEmpty else {
             return
         }
         
         showSubmissionSheet = true
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 5) {
+        // Simulate verification delay
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
+            
+            let doctor = Doctor(
+                name: self.name,
+                specialization: self.specialization,
+                licenseNumber: self.licenseNumber,
+                profileImage: self.profileImage,
+                certificateImage: self.certificateImage,
+                status: .approved
+            )
+            
+            self.approvedDoctor = doctor
+            self.navigateToHome = true
             self.verificationCompleted = true
         }
     }

@@ -64,5 +64,18 @@ struct DoctorOnboardingView: View {
             DoctorSubmissionSuccessView()
                 .environmentObject(vm)
         }
+
+        .navigationDestination(isPresented: $vm.navigateToHome) {
+            DoctorHomeView(
+                doctor: vm.approvedDoctor ?? Doctor(
+                    name: "",
+                    specialization: "",
+                    licenseNumber: "",
+                    profileImage: nil,
+                    certificateImage: nil,
+                    status: .approved
+                )
+            )
+        }
     }
 }
