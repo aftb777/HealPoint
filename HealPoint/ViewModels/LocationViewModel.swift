@@ -12,7 +12,7 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     private let manager = CLLocationManager()
     
-    @Published var permissionGranted = false
+    @Published var isLocationAuthorized: Bool = false
     
     override init() {
         super.init()
@@ -25,10 +25,10 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
         switch manager.authorizationStatus {
-        case .authorizedAlways, .authorizedWhenInUse:
-            permissionGranted = true
+        case .authorizedWhenInUse, .authorizedAlways:
+            isLocationAuthorized = true
         default:
-            permissionGranted = false
+            isLocationAuthorized = false
         }
     }
 }

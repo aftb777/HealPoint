@@ -26,7 +26,7 @@ struct LocationPermissionView: View {
             }
             .buttonStyle(.borderedProminent)
             
-            if locationVM.permissionGranted {
+            if locationVM.isLocationAuthorized {
                 Text("Location Access Granted ✅")
                     .foregroundColor(.green)
             }
