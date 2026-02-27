@@ -13,7 +13,7 @@ struct OnboardingView: View {
             
             Text("HealPoint")
                 .font(.largeTitle)
-                .fontWeight(.bold)
+                .bold()
             
             Text("Choose your role")
                 .foregroundColor(.gray)

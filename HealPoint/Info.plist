@@ -3,6 +3,6 @@
 <plist version="1.0">
 <dict>
 	<key>NSLocationWhenInUseUsageDescription</key>
-	<string>We use your location to show nearby verified doctors.</string>
+	<string>We use your location to show nearby doctors.</string>
 </dict>
 </plist>

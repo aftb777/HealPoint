@@ -9,14 +9,15 @@ import SwiftUI
 struct PatientLoginView: View {
     
     @StateObject private var authVM = AuthViewModel()
-    @State private var goToLocation = false
+    @EnvironmentObject var appState: AppState
     
     var body: some View {
+        
         VStack(spacing: 20) {
             
             Text("Patient Login")
                 .font(.title)
-                .fontWeight(.bold)
+                .bold()
             
             TextField("Email", text: $authVM.email)
                 .textFieldStyle(.roundedBorder)
@@ -26,16 +27,13 @@ struct PatientLoginView: View {
                 .textFieldStyle(.roundedBorder)
             
             Button("Login") {
-                authVM.loginAsPatient()
-                if authVM.isAuthenticated {
-                    goToLocation = true
-                }
+                appState.currentUser = User(
+                    email: authVM.email,
+                    role: .patient
+                )
             }
             .buttonStyle(.borderedProminent)
         }
         .padding()
-        .navigationDestination(isPresented: $goToLocation) {
-            LocationPermissionView()
-        }
     }
 }

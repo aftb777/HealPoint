@@ -12,23 +12,29 @@ class LocationViewModel: NSObject, ObservableObject, CLLocationManagerDelegate {
     
     private let manager = CLLocationManager()
     
-    @Published var isLocationAuthorized: Bool = false
+    @Published var isLocationAuthorized = false
     
     override init() {
         super.init()
         manager.delegate = self
+        checkPermission()
     }
     
     func requestPermission() {
         manager.requestWhenInUseAuthorization()
     }
     
-    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
-        switch manager.authorizationStatus {
-        case .authorizedWhenInUse, .authorizedAlways:
+    private func checkPermission() {
+        let status = manager.authorizationStatus
+        
+        if status == .authorizedWhenInUse || status == .authorizedAlways {
             isLocationAuthorized = true
-        default:
+        } else {
             isLocationAuthorized = false
         }
+    }
+    
+    func locationManagerDidChangeAuthorization(_ manager: CLLocationManager) {
+        checkPermission()
     }
 }
