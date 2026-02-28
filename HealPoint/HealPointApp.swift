@@ -25,18 +25,11 @@ struct HealPointApp: App {
                         PatientRootView()
                     }
                     
-                } else {
-                    DoctorHomeView(
-                        doctor: Doctor(
-                            name: user.email,
-                            specialization: "General",
-                            licenseNumber: "HP-000",
-                            profileImage: nil,
-                            certificateImage: nil,
-                            status: .approved
-                        )
-                    )
-                    .navigationBarBackButtonHidden(true)
+                } else if user.role == .doctor,
+                          let doctor = user.DoctorData {
+                    
+                    DoctorHomeView(doctor: doctor)
+                        .navigationBarBackButtonHidden(true)
                 }
                 
             } else {

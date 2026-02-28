@@ -44,7 +44,6 @@ struct DoctorOnboardingView: View {
                 TextField("Medical License Number", text: $vm.licenseNumber)
                     .textFieldStyle(.roundedBorder)
                 
-                // Certificate Upload
                 VStack(alignment: .leading) {
                     Text("Upload License Certificate")
                         .font(.headline)
@@ -64,19 +63,6 @@ struct DoctorOnboardingView: View {
             if let doctor = vm.approvedDoctor {
                 DoctorSubmissionSuccessView(doctor: doctor)
             }
-        }
-
-        .navigationDestination(isPresented: $vm.navigateToHome) {
-            DoctorHomeView(
-                doctor: vm.approvedDoctor ?? Doctor(
-                    name: "",
-                    specialization: "",
-                    licenseNumber: "",
-                    profileImage: nil,
-                    certificateImage: nil,
-                    status: .approved
-                )
-            )
         }
         .navigationBarBackButtonHidden(true)
     }

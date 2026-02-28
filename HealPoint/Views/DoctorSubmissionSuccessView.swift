@@ -10,7 +10,7 @@ struct DoctorSubmissionSuccessView: View {
     
     var doctor: Doctor
     @EnvironmentObject var appState: AppState
-    @Environment(\.dismiss) var dismiss 
+    @Environment(\.dismiss) var dismiss
     
     var body: some View {
         
@@ -34,15 +34,17 @@ struct DoctorSubmissionSuccessView: View {
             .foregroundColor(.gray)
         }
         .padding()
-        .onAppear {
+        .onChange(of: doctor.status) {
             
             if doctor.status == .approved {
                 DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
                     
                     dismiss()
+                    
                     appState.currentUser = User(
                         email: doctor.name,
-                        role: .doctor
+                        role: .doctor,
+                        DoctorData: doctor
                     )
                 }
             }

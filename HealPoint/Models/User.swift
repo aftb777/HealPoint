@@ -14,4 +14,5 @@ enum UserRole {
 struct User {
     var email: String
     var role: UserRole
+    var DoctorData: Doctor? = nil
 }
