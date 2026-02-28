@@ -14,6 +14,16 @@ The application includes structured onboarding, location-based discovery, doctor
 
 ---
 
+## 🧪 Test Credentials
+
+To quickly explore the app without creating a new account, use the following:
+
+| Role     | Email              | Password |
+|----------|-------------------|----------|
+| Patient  | patient@test.com  | 1234     |
+
+---
+
 ## ✨ Key Features
 
 ### 👤 Patient Module
