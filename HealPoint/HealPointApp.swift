@@ -36,6 +36,7 @@ struct HealPointApp: App {
                             status: .approved
                         )
                     )
+                    .navigationBarBackButtonHidden(true)
                 }
                 
             } else {

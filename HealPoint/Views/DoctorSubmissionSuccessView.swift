@@ -8,22 +8,25 @@ import SwiftUI
 
 struct DoctorSubmissionSuccessView: View {
     
-    @EnvironmentObject var vm: DoctorOnboardingViewModel
+    var doctor: Doctor
+    @EnvironmentObject var appState: AppState
+    @Environment(\.dismiss) var dismiss 
     
     var body: some View {
+        
         VStack(spacing: 30) {
             
-            Image(systemName: vm.verificationCompleted ? "checkmark.seal.fill" : "hourglass")
+            Image(systemName: doctor.status == .approved ? "checkmark.seal.fill" : "hourglass")
                 .resizable()
                 .frame(width: 120, height: 120)
-                .foregroundColor(vm.verificationCompleted ? .green : .orange)
+                .foregroundColor(doctor.status == .approved ? .green : .orange)
             
-            Text(vm.verificationCompleted ? "Verification Approved" : "Application Submitted")
+            Text(doctor.status == .approved ? "Verification Approved" : "Application Submitted")
                 .font(.title)
                 .bold()
             
             Text(
-                vm.verificationCompleted
+                doctor.status == .approved
                 ? "You are now a verified doctor on HealPoint."
                 : "We are reviewing your documents. Please wait..."
             )
@@ -31,5 +34,18 @@ struct DoctorSubmissionSuccessView: View {
             .foregroundColor(.gray)
         }
         .padding()
+        .onAppear {
+            
+            if doctor.status == .approved {
+                DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+                    
+                    dismiss()
+                    appState.currentUser = User(
+                        email: doctor.name,
+                        role: .doctor
+                    )
+                }
+            }
+        }
     }
 }

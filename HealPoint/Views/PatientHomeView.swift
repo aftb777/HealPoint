@@ -12,6 +12,7 @@ struct PatientHomeView: View {
     @StateObject private var locationVM = LocationViewModel()
     @EnvironmentObject var appState: AppState
     @State private var searchText: String = ""
+    @State private var selectedDoctor: Doctor? = nil   
     
     var body: some View {
         
@@ -76,13 +77,15 @@ struct PatientHomeView: View {
                                     Text(doctor.specialization)
                                         .font(.subheadline)
                                         .foregroundColor(.gray)
-                                    
                                 }
                                 .padding()
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .background(Color(.systemGray6))
                                 .cornerRadius(12)
                                 .padding(.horizontal)
+                                .onTapGesture {
+                                    selectedDoctor = doctor
+                                }
                             }
                         }
                     }
@@ -111,6 +114,9 @@ struct PatientHomeView: View {
                 }
                 .padding()
             }
+        }
+        .sheet(item: $selectedDoctor) { doctor in
+            AppointmentBookingView(doctor: doctor)
         }
     }
     

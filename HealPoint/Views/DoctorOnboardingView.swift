@@ -61,8 +61,9 @@ struct DoctorOnboardingView: View {
             .padding()
         }
         .sheet(isPresented: $vm.showSubmissionSheet) {
-            DoctorSubmissionSuccessView()
-                .environmentObject(vm)
+            if let doctor = vm.approvedDoctor {
+                DoctorSubmissionSuccessView(doctor: doctor)
+            }
         }
 
         .navigationDestination(isPresented: $vm.navigateToHome) {
@@ -77,5 +78,6 @@ struct DoctorOnboardingView: View {
                 )
             )
         }
+        .navigationBarBackButtonHidden(true)
     }
 }

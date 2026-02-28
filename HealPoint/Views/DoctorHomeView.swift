@@ -46,6 +46,7 @@ struct DoctorHomeView: View {
                         Label("Profile", systemImage: "person")
                     }
             }
+            .navigationBarBackButtonHidden(true)
         }
     }
 }
